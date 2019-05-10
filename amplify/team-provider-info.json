@@ -1,0 +1,19 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "dansblogv03-prod-20190509232705-authRole",
+            "UnauthRoleArn": "arn:aws:iam::406598363245:role/dansblogv03-prod-20190509232705-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::406598363245:role/dansblogv03-prod-20190509232705-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "dansblogv03-prod-20190509232705-deployment",
+            "UnauthRoleName": "dansblogv03-prod-20190509232705-unauthRole",
+            "StackName": "dansblogv03-prod-20190509232705",
+            "StackId": "arn:aws:cloudformation:us-east-2:406598363245:stack/dansblogv03-prod-20190509232705/7c30ce30-72d3-11e9-a1d6-0a1513ed47e4"
+        },
+        "categories": {
+            "auth": {
+                "cognito5695a127": {}
+            }
+        }
+    }
+}
