@@ -14,6 +14,10 @@
           <H4>BLOG BODY</H4>
           <textarea v-model="form.Body_Tx" class="form-control" id="exampleTextarea" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 184px;"></textarea>
         </div>
+        <div class="form-group">
+          <h4>ENVIRONMENT</h4>
+          <input v-model="form.Env_Id" class="form-control" placeholder="Enter Environment Name...">
+        </div>
         <button @click="onSubmit" type="submit" class="btn btn-secondary">Submit</button>
       </fieldset>
     </form>
@@ -30,7 +34,8 @@ import { Auth } from 'aws-amplify'
         form: {
           Title_Tx: '',
           Abstract_Tx: '',
-          Body_Tx: ''
+          Body_Tx: '',
+          Env_Id: ''
         },
         show: true,
         jwtToken: null

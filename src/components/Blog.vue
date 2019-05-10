@@ -3,7 +3,7 @@
       <div class="container-fluid mt-4">
           <div class="row justify-content-center">
               <div class="col-auto mb-3" v-bind:key=item.Blog_Id v-for="item in blogData">
-                <div class="card bg-secondary mb-3" style="max-width: 18rem; max-height: 18rem;">
+                <div v-if="item.Env_Id==='prod'" class="card bg-secondary mb-3" style="max-width: 18rem; max-height: 18rem;">
                   <div class="card-body">
                     <h4 class="card-title">{{item.Title_Tx}}</h4>
                     <p class="card-text">{{item.Abstract_Tx}}</p>

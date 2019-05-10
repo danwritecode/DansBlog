@@ -11,7 +11,7 @@
           <h6>Author: Dan Nelson</h6>
         </div>
         <br>
-        <span style="white-space: pre-wrap;">{{ blogData.Body_Tx }}</span>
+        <div v-html="compiledMarkdown"></div>
       </div>
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
       blogData: null,
       loading: true
 
+    }
+  },
+  computed: {
+    compiledMarkdown: function () {
+      return marked(this.blogData.Body_Tx, { sanitize: true })
     }
   },
   created() {
