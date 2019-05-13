@@ -26,6 +26,16 @@
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/writeblog">WRITE NEW BLOG</router-link>
             </div>
           </li>
+          <li class="nav-item">
+            <div v-if="userSession!=null">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/drafts">EDIT DRAFTS</router-link>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div v-if="userSession!=null">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login">LOGOUT</router-link>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>

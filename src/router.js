@@ -8,6 +8,8 @@ import writeblog from '@/components/WriteBlog'
 import blogPost from '@/components/BlogPost'
 import login from '@/components/Login'
 import VueRouter from 'vue-router';
+import drafts from '@/components/Drafts'
+import editBlog from '@/components/EditBlog'
 
 Vue.use(Router)
 
@@ -53,6 +55,16 @@ Vue.use(Router)
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/drafts',
+      name: 'drafts',
+      component: drafts
+    },
+    {
+      path: '/editblog',
+      name: 'editblog',
+      component: editBlog
     }
   ]
 
