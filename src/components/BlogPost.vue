@@ -67,7 +67,11 @@ export default {
   border-color: #fff;
 }
 
-h1, h2, h6 {
+body {
+  color: #fff !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   color: #fff;
 }
@@ -85,4 +89,14 @@ li {
 a {
   color: #42b983;
 }
+
+.markdown-body .highlight pre, .markdown-body pre {
+    background-color: #eaedf1;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+
 </style>
