@@ -36,7 +36,7 @@ export default {
       filteredBlogData() {
         if(!this.blogData) return []; //handle empty array
 
-        return this.blogData.filter(x => x.Env_Id === 'prod')
+        return this.blogData.filter(x => x.State_Tx === 'Live')
       }
     }
 

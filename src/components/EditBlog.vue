@@ -15,8 +15,8 @@
           <textarea v-model="form.Body_Tx" class="form-control" id="exampleTextarea" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 184px;"></textarea>
         </div>
         <div class="form-group">
-          <h4>ENVIRONMENT</h4>
-          <input v-model="form.Env_Id" class="form-control" placeholder="Enter Environment Name...">
+          <h4>DOCUMENT STATE</h4>
+          <input v-model="form.State_Tx" class="form-control" placeholder="Enter Document State...">
         </div>
         <button @click="onSubmit" type="submit" class="btn btn-secondary">Update</button>
       </fieldset>
@@ -36,7 +36,7 @@ import { Auth } from 'aws-amplify'
           Title_Tx: '',
           Abstract_Tx: '',
           Body_Tx: '',
-          Env_Id: ''
+          State_Tx: ''
         },
         show: true,
         jwtToken: null
@@ -88,7 +88,7 @@ import { Auth } from 'aws-amplify'
       .then(response => (this.form.Title_Tx = response.data.Title_Tx, 
                           this.form.Body_Tx = response.data.Body_Tx,
                           this.form.Abstract_Tx = response.data.Abstract_Tx,
-                          this.form.Env_Id = response.data.Env_Id))
+                          this.form.State_Tx = response.data.State_Tx))
       .then(this.loading = false)
       .catch(error => alert(error))
     }
