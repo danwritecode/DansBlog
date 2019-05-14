@@ -16,7 +16,13 @@
         </div>
         <div class="form-group">
           <h4>DOCUMENT STATE</h4>
-          <input v-model="form.State_Tx" class="form-control" placeholder="Enter Document State...">
+            <div class="form-group">
+              <select v-model="form.State_Tx" class="custom-select">
+                <option disabled value>Select document state</option>
+                <option>Draft</option>
+                <option>Live</option>
+              </select>
+            </div>
         </div>
         <button @click="onSubmit" type="submit" class="btn btn-secondary">Submit</button>
       </fieldset>
