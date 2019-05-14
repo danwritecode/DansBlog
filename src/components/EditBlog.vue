@@ -105,7 +105,7 @@ import { Auth } from 'aws-amplify'
                           this.form.Abstract_Tx = response.data.Abstract_Tx,
                           this.form.State_Tx = response.data.State_Tx))
       .then(this.loading = false)
-      .catch(error => alert(error))
+      .catch(error => console.log(error))
     }
   }
 </script>

@@ -59,12 +59,14 @@ Vue.use(Router)
     {
       path: '/drafts',
       name: 'drafts',
-      component: drafts
+      component: drafts,
+      meta: { requiresAuth: true}
     },
     {
       path: '/editblog',
       name: 'editblog',
-      component: editBlog
+      component: editBlog,
+      meta: { requiresAuth: true}
     }
   ]
 
