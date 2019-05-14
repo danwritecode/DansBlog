@@ -21,6 +21,17 @@
         <button @click="onSubmit" type="submit" class="btn btn-secondary">Update</button>
       </fieldset>
     </form>
+    <br>
+    <div class="alert alert-dismissible alert-success" v-if="postStatus === 'Success'">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div>{{postStatus}}</div>
+      <div>{{postMessage}}</div>
+    </div>
+    <div class="alert alert-dismissible alert-danger" v-if="postStatus === 'Error'">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div>{{postStatus}}</div>
+      <div>{{postMessage}}</div>
+    </div>
   </div>
 </template>
 
@@ -39,7 +50,9 @@ import { Auth } from 'aws-amplify'
           State_Tx: ''
         },
         show: true,
-        jwtToken: null
+        jwtToken: null,
+        postStatus: null,
+        postMessage: null
       }
     },
     methods: {
@@ -54,12 +67,8 @@ import { Auth } from 'aws-amplify'
           }
         }
         axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/updateblogpost",JSON.stringify(this.form),config)
-        .then(function(response) {
-          alert(response);
-        })
-        .catch(function(error) {
-          alert(error);
-        })
+        .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
+        .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
         //alert(JSON.stringify(this.form))
       },
       onReset(evt) {

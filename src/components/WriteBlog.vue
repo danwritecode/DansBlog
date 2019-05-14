@@ -15,12 +15,23 @@
           <textarea v-model="form.Body_Tx" class="form-control" id="exampleTextarea" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 184px;"></textarea>
         </div>
         <div class="form-group">
-          <h4>ENVIRONMENT</h4>
-          <input v-model="form.Env_Id" class="form-control" placeholder="Enter Environment Name...">
+          <h4>DOCUMENT STATE</h4>
+          <input v-model="form.State_Tx" class="form-control" placeholder="Enter Document State...">
         </div>
         <button @click="onSubmit" type="submit" class="btn btn-secondary">Submit</button>
       </fieldset>
     </form>
+    <br>
+    <div class="alert alert-dismissible alert-success" v-if="postStatus === 'Success'">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div>{{postStatus}}</div>
+      <div>{{postMessage}}</div>
+    </div>
+    <div class="alert alert-dismissible alert-danger" v-if="postStatus === 'Error'">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div>{{postStatus}}</div>
+      <div>{{postMessage}}</div>
+    </div>
   </div>
 </template>
 
@@ -35,10 +46,12 @@ import { Auth } from 'aws-amplify'
           Title_Tx: '',
           Abstract_Tx: '',
           Body_Tx: '',
-          Env_Id: ''
+          State_Tx: ''
         },
         show: true,
-        jwtToken: null
+        jwtToken: null,
+        postStatus: null,
+        postMessage: null
       }
     },
     methods: {
@@ -50,13 +63,8 @@ import { Auth } from 'aws-amplify'
           }
         }
         axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/createblogpost",JSON.stringify(this.form),config)
-        .then(function(response) {
-          alert(response);
-        })
-        .catch(function(error) {
-          alert(error);
-        })
-        //alert(JSON.stringify(this.form))
+        .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
+        .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
       },
       onReset(evt) {
         evt.preventDefault()
