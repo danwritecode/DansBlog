@@ -12,29 +12,29 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/home">HOME</router-link>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <router-link  class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/blog">BLOG</router-link>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/missionstatement">MY MISSION</router-link>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/contact">CONTACT</router-link>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <div v-if="userSession!=null">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/writeblog">WRITE NEW BLOG</router-link>
             </div>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <div v-if="userSession!=null">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/drafts">EDIT DRAFTS</router-link>
             </div>
           </li>
-          <li class="nav-item">
+          <li @click="isActive = !isActive" class="nav-item">
             <div v-if="userSession!=null">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login">LOGOUT</router-link>
             </div>
