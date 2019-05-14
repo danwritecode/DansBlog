@@ -31,7 +31,7 @@
 <style lang="scss" scoped>
 
 img {
-  max-width: 85%;
+  max-width: 80%;
   transition: 2s;
 }
 
@@ -41,7 +41,18 @@ img {
 } */
 
 #typewriter {
-  margin: 50px 30px 0 30px;
+  margin: 20px 30px 0 30px;
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 400px) {
+    img {
+    max-width: 85%;
+  }
+
+  #typewriter {
+    margin: 50px 30px 0 30px;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
