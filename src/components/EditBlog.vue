@@ -24,7 +24,34 @@
               </select>
             </div>
         </div>
-        <button @click="onSubmit" type="submit" class="btn btn-secondary">Update</button>
+        <button @click="onSubmit" type="submit" class="modifyButtons btn btn-secondary">Update</button>
+        <button v-if="userSession!=null" @click="showModal = true" class="modifyButtons btn btn-secondary">DELETE POST</button>
+          <div v-if="showModal">
+            <transition name="modal">
+              <div class="modal-mask">
+                <div class="modal-wrapper">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Are you sure you want to delete?</h5>
+                        <button type="button" @click="showModal = false" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Deleting this will delete the post forever. Are you sure you want to delete?</p>
+                        <p>Blog ID: {{form.Blog_Id}}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" @click="deletePost(); showModal = false" class="btn btn-primary">DELETE POST</button>
+                        <button type="button" @click="showModal = false" class="btn btn-secondary" data-dismiss="modal">NEVERMIND</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </div>
       </fieldset>
     </form>
     <br>
@@ -58,7 +85,9 @@ import { Auth } from 'aws-amplify'
         show: true,
         jwtToken: null,
         postStatus: null,
-        postMessage: null
+        postMessage: null,
+        userSession: null,
+        showModal: false
       }
     },
     methods: {
@@ -88,11 +117,22 @@ import { Auth } from 'aws-amplify'
         this.$nextTick(() => {
           this.show = true
         })
+      },
+      deletePost() {
+        const postBody = '{"Blog_Id":' + '"' + this.form.Blog_Id + '"}';
+        const config = {
+            headers: {
+              authorization: this.jwtToken
+            }
+          }
+        axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/deleteblogpost",postBody,config)
+        .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
+        .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
       }
     },
     mounted() {
         Auth.currentSession()
-          .then(data => (this.jwtToken = data.idToken.jwtToken))
+          .then(data => (this.userSession = data, this.jwtToken = data.idToken.jwtToken))
           .catch(err => console.log(err))
       },
     created() {
@@ -112,6 +152,35 @@ import { Auth } from 'aws-amplify'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal-body {
+  color: #1a1a1a
+}
+
+.modal-title {
+  color: #1a1a1a
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modifyButtons {
+  margin: 20px 20px 20px 0;
+}
+
 #blogSubmitForm {
   text-align: left;
   margin-left: 20px;

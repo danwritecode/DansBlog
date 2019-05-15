@@ -63,7 +63,7 @@ Vue.use(Router)
       meta: { requiresAuth: true}
     },
     {
-      path: '/editblog',
+      path: '/editblog:id',
       name: 'editblog',
       component: editBlog,
       meta: { requiresAuth: true}
