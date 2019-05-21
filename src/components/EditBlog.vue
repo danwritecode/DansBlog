@@ -24,6 +24,9 @@
               </select>
             </div>
         </div>
+        <router-link :to="{ name: 'blogpost', params: { id: form.Blog_Id} }">
+          <button @click="showPreview" class="modifyButtons btn btn-secondary">PREVIEW</button>
+        </router-link>
         <button @click="onSubmit" type="submit" class="modifyButtons btn btn-secondary">Update</button>
         <button v-if="userSession!=null" @click="showModal = true" class="modifyButtons btn btn-secondary">DELETE POST</button>
           <div v-if="showModal">
@@ -104,7 +107,18 @@ import { Auth } from 'aws-amplify'
         axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/updateblogpost",JSON.stringify(this.form),config)
         .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
         .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
-        //alert(JSON.stringify(this.form))
+      },
+      //Even though we're just showing a preview, we need to save the state of the post when the button is clicked
+      showPreview() {
+        this.form.State_Tx = 'Draft'
+        const config = {
+          headers: {
+            authorization: this.jwtToken
+          }
+        }
+        axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/updateblogpost",JSON.stringify(this.form),config)
+        .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
+        .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
       },
       onReset(evt) {
         evt.preventDefault()
@@ -178,7 +192,7 @@ import { Auth } from 'aws-amplify'
 }
 
 .modifyButtons {
-  margin: 20px 20px 20px 0;
+  margin: 10px 10px 10px 0;
 }
 
 #blogSubmitForm {

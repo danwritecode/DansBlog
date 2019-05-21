@@ -1,8 +1,10 @@
 <template>
   <div class="blogPost" id="blogPost">
     <br>
-      <div id="spinnerLoading" v-if="loading">
-        <b-spinner></b-spinner>
+      <div class="spinnerLoadingAdjust" v-if="loading">
+        <div class="spinner-border m-5" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
       <div v-else>
         <div id="blogHeader">
@@ -87,9 +89,11 @@ export default {
     this.id = this.$route.params.id;
     axios
       .get('https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/getblogpostbyid?Blog_Id='+this.id)
-      .then(response => (this.blogData = response.data))
-      .then(this.loading = false)
-      .catch(error => alert(error))
+      .then(response => (this.blogData = response.data, this.loading = false))
+      .catch(error => {
+        alert(error);
+        this.loading = false;      
+      })
   },
   methods: {
     navigate() {
@@ -112,6 +116,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.spinnerLoadingAdjust {
+  text-align: center;
+  justify-content: center;
+  margin-left: 5%;
+}
+
 .modal-body {
   color: #1a1a1a
 }
@@ -138,7 +148,7 @@ export default {
 }
 
 .modifyButtons {
-  margin: 20px 20px 20px 0;
+  margin: 10px 10px 10px 0;
 }
 
 #spinnerLoading {

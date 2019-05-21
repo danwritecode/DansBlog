@@ -1,6 +1,11 @@
 <template>
   <div class="blog">
-      <div class="container-fluid mt-4">
+      <div class="spinnerLoadingAdjust" v-if="loading">
+        <div class="spinner-border m-5" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="container-fluid mt-4" v-else>
           <div class="row justify-content-center">
               <div class="col-auto mb-3" v-bind:key=item.Blog_Id v-for="item in filteredBlogData">
                 <div id="blogCard" class="card bg-secondary mb-3" style="max-width: 18rem; max-height: 18rem;">
@@ -24,14 +29,15 @@ export default {
   name: 'blog',
   data () {
     return {
-      blogData:null
+      blogData:null,
+      loading: true
     }
   },
-    mounted() {
-      axios
-        .get('https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/getallblogposts')
-        .then(response => (this.blogData = response.data))
-        .catch(error => alert(error))
+  created() {
+    axios
+      .get('https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/getallblogposts')
+      .then(response => (this.blogData = response.data, this.loading = false))
+      .catch(error => alert(error), this.loading = false)
   },
     computed: {
       filteredBlogData() {
@@ -46,6 +52,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.spinnerLoadingAdjust {
+  text-align: center;
+  justify-content: center;
+  margin-left: 5%;
+  color: white;
+}
+
 #readPostButton {
   padding: 0.8rem;
 }
