@@ -4,7 +4,7 @@
     <div id="contact">
       <h1>CONTACT ME</h1>
       <h5>Email: dnelson4993@gmail.com</h5>
-      <h5>Twitter: dannels_io</h5>
+      <h5>Twitter: danatdev</h5>
     </div>
   </div>
 </template>
