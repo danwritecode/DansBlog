@@ -11,6 +11,11 @@
           <h1>{{ blogData.Title_Tx }}</h1>
           <h6>Published On: {{ blogData.CreatedOn }}</h6>
           <h6>Author: Dan Nelson</h6>
+          <div class="thumbReaction">
+            <span v-show="!thumbClicked" @click="thumbClick" class="thumbReaction"><i class="fa fa-thumbs-o-up" style="font-size:24px"></i></span>
+            <span v-show="thumbClicked" @click="thumbClick" class="thumbReaction"><i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
+            <span id="thumbsUpCounter">{{thumbsUp}}</span>
+          </div>
         </div>
         <br>
         <div v-html="compiledMarkdown"></div>
@@ -72,7 +77,9 @@ export default {
       showModal: false,
       jwtToken: null,
       postStatus: null,
-      postMessage: null
+      postMessage: null,
+      thumbsUp: 0,
+      thumbClicked: false
     }
   },
   mounted() {
@@ -94,6 +101,10 @@ export default {
         alert(error);
         this.loading = false;      
       })
+      debugger;
+    if (localStorage.thumbClicked) {
+      this.thumbClicked = localStorage.thumbClicked;
+    }
   },
   methods: {
     navigate() {
@@ -109,6 +120,10 @@ export default {
       axios.post("https://w1k14u6tm8.execute-api.us-east-2.amazonaws.com/Dev/deleteblogpost",postBody,config)
       .then(response => (this.postMessage = response.data, this.postStatus = "Success"))
       .catch(error => (this.postMessage = error.data, this.postStatus = "Error"))
+    },
+    thumbClick() {
+      this.thumbClicked = !this.thumbClicked
+      localStorage.thumbClicked = this.thumbClicked
     }
   }
 }
@@ -116,6 +131,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+span#thumbsUpCounter {
+  margin-left: 10px;
+}
+
+span.thumbReaction {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+div.thumbReaction {
+  margin: 5px 0 10px 0;
+}
+
 .spinnerLoadingAdjust {
   text-align: center;
   justify-content: center;
